@@ -53,7 +53,17 @@ while($token != '') // Loop so we can handle aliases
 			// Handle standard redirections, both custom and auto-assigned
 			require_once "piwik/PiwikTracker.php";
 			PiwikTracker::$URL = 'http://bonnieqr.net/piwik/';
-			header($_SERVER['SERVER_PROTOCOL'].' 301 Moved Permanently');
+			$piwikTracker = new PiwikTracker( $idSite = $token );
+			// You can manually set the visitor details (resolution, time, plugins, etc.)
+			// See all other ->set* functions available in the PiwikTracker.php file
+			//$piwikTracker->setResolution(1600, 1400);
+
+			// Sends Tracker request via http
+			$piwikTracker->doTrackPageView('Document title of current page view');
+
+			// You can also track Goal conversions
+			//$piwikTracker->doTrackGoal($idGoal = 1, $revenue = 42);
+			header($_SERVER['SERVER_PROTOCOL'].' 302 Moved Permanently');
 			header('Location:'.$row['url']);
 			exit();
 		}
