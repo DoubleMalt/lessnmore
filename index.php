@@ -51,6 +51,7 @@ while($token != '') // Loop so we can handle aliases
 			}
 		} else {
 			// Handle standard redirections, both custom and auto-assigned
+			//FIXME call pikwik
 			header($_SERVER['SERVER_PROTOCOL'].' 301 Moved Permanently');
 			header('Location:'.$row['url']);
 			exit();
