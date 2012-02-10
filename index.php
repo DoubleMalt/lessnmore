@@ -51,7 +51,8 @@ while($token != '') // Loop so we can handle aliases
 			}
 		} else {
 			// Handle standard redirections, both custom and auto-assigned
-			//FIXME call pikwik
+			require_once "piwik/PiwikTracker.php";
+			PiwikTracker::$URL = 'http://bonnieqr.net/piwik/';
 			header($_SERVER['SERVER_PROTOCOL'].' 301 Moved Permanently');
 			header('Location:'.$row['url']);
 			exit();
